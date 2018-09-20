@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace OdeToFood
 {
@@ -22,15 +23,36 @@ namespace OdeToFood
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
                               IHostingEnvironment env,
-                              IGreeter greeter)
+                              IGreeter greeter, ILogger<Startup> logger)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
+
+            // middleware
+            //app.Use(next =>
+            //{
+            //    return async context =>
+            //    {
+            //        logger.LogInformation("Request incoming!");
+            //        if (context.Request.Path.StartsWithSegments("/mym"))
+            //        {
+            //            await context.Response.WriteAsync("Hit!");
+            //            logger.LogInformation("Request handled!");
+            //        }
+            //        else
+            //        {
+            //            await next(context);
+            //            logger.LogInformation("Request outgoing!");
+            //        }
+            //    };
+            //});
+
 
             app.Run(async (context) =>
             {
+                throw new Exception("error!");
                 var greet = greeter.GetMessageOfTheDay();
                 await context.Response.WriteAsync(greet);
             });
