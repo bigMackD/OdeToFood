@@ -25,34 +25,18 @@ namespace OdeToFood
                               IHostingEnvironment env,
                               IGreeter greeter, ILogger<Startup> logger)
         {
-            //if (env.IsDevelopment())
-            //{
-            //    app.UseDeveloperExceptionPage();
-            //}
+            if (env.IsDevelopment())
+            {
+                
+                app.UseDeveloperExceptionPage();
+            }
 
-            // middleware
-            //app.Use(next =>
-            //{
-            //    return async context =>
-            //    {
-            //        logger.LogInformation("Request incoming!");
-            //        if (context.Request.Path.StartsWithSegments("/mym"))
-            //        {
-            //            await context.Response.WriteAsync("Hit!");
-            //            logger.LogInformation("Request handled!");
-            //        }
-            //        else
-            //        {
-            //            await next(context);
-            //            logger.LogInformation("Request outgoing!");
-            //        }
-            //    };
-            //});
+            app.UseStaticFiles();
 
 
+           
             app.Run(async (context) =>
             {
-                throw new Exception("error!");
                 var greet = greeter.GetMessageOfTheDay();
                 await context.Response.WriteAsync(greet);
             });
