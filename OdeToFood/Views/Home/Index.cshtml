@@ -1,9 +1,9 @@
 ﻿@model OdeToFood.ViewModels.HomeIndexViewModel
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
+
+@{ 
+    ViewBag.Title = "Home page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
     <h1>@Model.CurrentMessage</h1>
     <table>
         @foreach (var restaurant in Model.Restaurants)
@@ -13,11 +13,12 @@
                 <td>@restaurant.Name</td>
                 <td>
                     <a asp-action="Details" asp-route-id="@restaurant.Id">More</a>
+                    <a asp-page="/Restaurants/Edit" asp-route-id="@restaurant.Id">Edit</a>
                 </td>
             </tr>
         }
         <a asp-action="Create">Create restaurant</a>
 
-    </table>
-    </body>
-</html>
+   @section footer {
+        @Model.CurrentMessage
+   }
